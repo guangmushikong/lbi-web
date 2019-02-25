@@ -41,6 +41,7 @@ function initOverlays(){
     var jingzhuang_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/1.0.0/jingzhuang_satellite_raster@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
     var world_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/world/{x}/{y}/{z}.jpeg', {maxZoom: 13});
     var china_city_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/city/{x}/{y}/{z}.png', {maxZoom: 13});
+    var liupanshui_track_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/liupanshui_track_line/{x}/{y}/{z}.png', {maxZoom: 17});
     var china_city_xyz_geojson_Layer=initChina_City_xyz_geojson_Layer();
     var gujiao_xyz_geojson_Layer=initGujiao_Contour_xyz_geojson_Layer();
     var jingzhuang_xyz_geojson_Layer=initJingZhuang_Contour_xyz_geojson_Layer();
@@ -62,17 +63,23 @@ function initOverlays(){
         maxZoom: 17,
         tms: true
     });
-    var yunnan_satellite_png_Layer1=L.tileLayer(geoserver+'/xyz/1.0.0/yunnan_satellite_timeraster_201703@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
-    var yunnan_satellite_png_Layer2=L.tileLayer(geoserver+'/xyz/1.0.0/yunnan_satellite_timeraster_201709@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
+    var liupanshui_satellite_tms_png_Layer= L.tileLayer(geoserver+"/tms/1.0.0/liupanshui_satellite_raster@EPSG:900913@png/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+        tms: true
+    });
 
+    var yunnan_satellite_png_Layer2=L.tileLayer(geoserver+'/xyz/1.0.0/yunnan_satellite_timeraster_201709@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
+    var yunnan_satellite_png_Layer1=L.tileLayer(geoserver+'/xyz/1.0.0/yunnan_satellite_timeraster_201802@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
 
     var overlays={
         '世界卫星影像':world_satellite_tms_png_Layer,
         '中国城市面':china_city_tms_png_Layer,
+        '六盘水轨迹':liupanshui_track_xyz_png_Layer,
         '古交高分影像':gujiao_satellite_tms_png_Layer,
         '静庄高分影像':jingzhuang_satellite_tms_png_Layer,
-        '云南高分影像(201703)':yunnan_satellite_png_Layer1,
-        '云南高分影像(201709)':yunnan_satellite_png_Layer2
+        '六盘水高分影像':liupanshui_satellite_tms_png_Layer,
+        '云南高分影像(201709)':yunnan_satellite_png_Layer2,
+        '云南高分影像(201802)':yunnan_satellite_png_Layer1
     };
     return overlays;
 }

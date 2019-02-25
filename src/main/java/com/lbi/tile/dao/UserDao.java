@@ -10,12 +10,10 @@ import com.lbi.tile.model.SysRole;
 import com.lbi.tile.model.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -31,9 +29,7 @@ import java.util.List;
  ************************************/
 @Repository(value="userDao")
 @Slf4j
-public class UserDao {
-    @Resource(name="jdbcTemplate")
-    JdbcTemplate jdbcTemplate;
+public class UserDao extends CommonDao{
     @Value("${spring.table.t_sys_role}")
     String t_sys_role;
     @Value("${spring.table.t_sys_user}")

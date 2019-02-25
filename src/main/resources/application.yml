@@ -8,5 +8,22 @@ spring:
   mvc:
     favicon:
       enabled: true
-log:
-  home: logs
+zuul:
+  routes:
+    eureka_server:
+      path: /eureka_server/**
+      serviceId: register-server
+      stripPrefix: true
+      custom-sensitive-headers: true
+    eureka_server_static:
+      path: /eureka/**
+      serviceId: register-server
+      stripPrefix: false
+      custom-sensitive-headers: true
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://172.25.28.116:12001/eureka/,http://172.25.28.117:12001/eureka/

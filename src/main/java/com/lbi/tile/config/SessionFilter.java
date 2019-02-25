@@ -2,7 +2,6 @@ package com.lbi.tile.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -12,7 +11,7 @@ import java.util.Enumeration;
 
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 
-@WebFilter(filterName = "sessionFilter", urlPatterns = "/log/*")
+@WebFilter(filterName = "sessionFilter")
 @Slf4j
 public class SessionFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {

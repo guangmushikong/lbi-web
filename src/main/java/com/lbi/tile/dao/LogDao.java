@@ -4,11 +4,10 @@ import com.lbi.tile.model.Stat;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,9 +15,7 @@ import java.util.List;
 
 @Repository(value="logDao")
 @Slf4j
-public class LogDao {
-    @Resource(name="jdbcTemplate")
-    private JdbcTemplate jdbcTemplate;
+public class LogDao extends CommonDao{
     @Value("${spring.table.t_log}")
     String t_log;
 
