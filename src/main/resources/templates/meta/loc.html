@@ -45,6 +45,9 @@
     </div><!-- ./container -->
     <footer class="main-footer" th:include="common :: footer"></footer>
 </div><!-- ./wrapper -->
+<input type="hidden" id="m_cenx" th:value="${x}"/>
+<input type="hidden" id="m_ceny" th:value="${y}"/>
+<input type="hidden" id="m_cenz" th:value="${z}"/>
 </body>
 <script th:src="@{/assets/jquery/jquery.min.js}"></script>
 <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>

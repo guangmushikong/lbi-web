@@ -113,6 +113,15 @@ function initMap(){
         zoomOutTitle:'缩小'
     }).addTo(mapObj);
 
+    if($("#m_cenx").val()!=null){
+        var cx=parseFloat($("#m_cenx").val());
+        var cy=parseFloat($("#m_ceny").val());
+        var cz=parseInt($("#m_cenz").val());
+        console.log(cx+","+cy+","+cz);
+        var latlng=new L.LatLng($("#m_ceny").val(),$("#m_cenx").val());
+        mapObj.setView(latlng,$("#m_cenz").val());
+    }
+
     L.control.layers(baseMaps,overlays).addTo(mapObj);
     L.control.scale({imperial:false}).addTo(mapObj);//去除英制单位
     viewMapOption();

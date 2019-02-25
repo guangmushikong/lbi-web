@@ -8,6 +8,8 @@ package com.lbi.tile.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /*************************************
  * Class Name: PageController
@@ -43,8 +45,24 @@ public class PageController {
     }
 
     @RequestMapping("/meta/loc")
-    public String loc(){
-        return "meta/loc";
+    public ModelAndView loc(
+            @RequestParam(value = "x",required=false, defaultValue="0.0") double x,
+            @RequestParam(value = "y",required=false, defaultValue="0.0") double y,
+            @RequestParam(value = "z",required=false, defaultValue="0") int z){
+        ModelAndView mav = new ModelAndView("meta/loc");
+        mav.addObject("x", x);
+        mav.addObject("y", y);
+        mav.addObject("z", z);
+        return mav;
+    }
+
+    @RequestMapping("/meta/dataset")
+    public String dataset(){
+        return "meta/dataset";
+    }
+    @RequestMapping("/meta/project")
+    public String project(){
+        return "meta/project";
     }
 
     @RequestMapping("/meta/directory")

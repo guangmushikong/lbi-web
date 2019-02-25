@@ -18,5 +18,7 @@ spring:
   table:
     china_city_polygon: s_ods_city_simplify
     t_log: t_log
+    t_project: t_project
+    t_dataset: t_dataset
     t_sys_user: t_sys_user
     t_sys_role: t_sys_role

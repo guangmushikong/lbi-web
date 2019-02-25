@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>数据集</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/Ionicons/css/ionicons.min.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/AdminLTE/css/AdminLTE.min.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/AdminLTE/css/skins/_all-skins.min.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/jquery-dataTables/css/jquery.dataTables.css}" rel="stylesheet"/>
+
+</head>
+<body class="hold-transition skin-yellow-light sidebar-collapse sidebar-mini" onload="init()">
+<div class="wrapper">
+    <header class="main-header" th:include="common :: header_meta"></header>
+    <aside class="main-sidebar" th:include="common :: sidebar_meta"></aside>
+
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="box">
+                <div class="box-header with-border">
+                    <i class="fa fa-map-o"></i> <h3 class="box-title">数据集列表</h3>
+                </div>
+                <div class="box-body table-responsive">
+                    <div class="mailbox-controls">
+                        <table class="table table-bordered" id="datasetlist">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div><!-- ./container -->
+    <footer class="main-footer" th:include="common :: footer"></footer>
+</div><!-- ./wrapper -->
+</body>
+<script th:src="@{/assets/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/fastclick/fastclick.js}"></script>
+<script th:src="@{/assets/AdminLTE/js/adminlte.min.js}"></script>
+<script th:src="@{/assets/jquery-dataTables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/scripts/util.js}"></script>
+<script th:src="@{/scripts/dataset.js}"></script>
+</html>
