@@ -41,7 +41,7 @@ function initOverlays(){
     var jingzhuang_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/1.0.0/jingzhuang_satellite_raster@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
     var world_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/world/{x}/{y}/{z}.jpeg', {maxZoom: 13});
     var china_city_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/city/{x}/{y}/{z}.png', {maxZoom: 13});
-    var liupanshui_track_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/liupanshui_track_line/{x}/{y}/{z}.png', {maxZoom: 17});
+    var liupanshui_track_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/liupanshui_track_line1/{x}/{y}/{z}.png', {maxZoom: 17});
     var china_city_xyz_geojson_Layer=initChina_City_xyz_geojson_Layer();
     var gujiao_xyz_geojson_Layer=initGujiao_Contour_xyz_geojson_Layer();
     var jingzhuang_xyz_geojson_Layer=initJingZhuang_Contour_xyz_geojson_Layer();

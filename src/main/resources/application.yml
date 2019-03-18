@@ -1,13 +1,11 @@
 server:
   port: 8888
-spring:
-  application:
-    name: lbi-web
-  profiles:
-    active: dev
-  mvc:
-    favicon:
-      enabled: true
+################### 应用配置
+info:
+  version: 0.0.1
+  name: ${spring.application.name}
+  comment: "数据门户"
+################### Zuul Configuration ##########################
 zuul:
   routes:
     eureka_server:
@@ -20,11 +18,8 @@ zuul:
       serviceId: register-server
       stripPrefix: false
       custom-sensitive-headers: true
-eureka:
-  instance:
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    status-page-url-path: http://111.202.109.210:8888/
-  client:
-    serviceUrl:
-      defaultZone: http://172.28.14.23:11111/eureka/
+    geoserver:
+      path: /geoserver/**
+      serviceId: http://172.25.28.117:8888/geoserver
+      stripPrefix: true
+      custom-sensitive-headers: true

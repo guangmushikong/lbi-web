@@ -11,15 +11,19 @@ import java.util.Enumeration;
 
 import static org.apache.commons.lang3.StringUtils.isNoneEmpty;
 
-@WebFilter(filterName = "sessionFilter")
+@WebFilter
 @Slf4j
 public class SessionFilter implements Filter {
+
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest request=(HttpServletRequest)req;
 
         String url = request.getRequestURI();
-        if(url.startsWith("/assets/") || url.startsWith("/scripts/")){
+
+        if(url.startsWith("/assets/")
+                || url.startsWith("/scripts/")
+                || url.startsWith("/favicon.ico")){
             chain.doFilter(req, res);
         }else {
             long star = System.currentTimeMillis();

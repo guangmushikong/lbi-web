@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.context.annotation.ComponentScan;
 
 /*************************************
  * Class Name: Application
@@ -21,8 +20,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @since 1.0.0
  ************************************/
 @SpringBootApplication
-@EnableAutoConfiguration
-@ComponentScan(basePackages = {"com.lbi.tile"})
 @EnableZuulProxy
 @ServletComponentScan
 public class Application {
