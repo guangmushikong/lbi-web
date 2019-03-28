@@ -1,10 +1,9 @@
 var mapObj;
 var cityList;
 var commonstyle;
-var geoserver;
+var geoserver="http://111.202.109.210:8080";
 var xyMarker;
 function init(){
-	geoserver="http://localhost:8080";
     resizeMap();
     initCommonStyle();
     initMap();

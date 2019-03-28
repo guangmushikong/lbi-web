@@ -1,4 +1,4 @@
-
+var geoserver="http://111.202.109.210:8080";
 function init(){
     resizeMap();
     initMap();
@@ -7,7 +7,7 @@ function init(){
 function initMap(){
     Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNmE2Zjk5Yi1iNzczLTRiNzQtOTFkYi03YjExZmU0YTc5NzQiLCJpZCI6OTI3OSwic2NvcGVzIjpbImFzciIsImdjIl0sImlhdCI6MTU1Mzc1NzgxOX0.-QnaM3w17Vg184NNN7F9oOIQFfuGrWRKF6zjf25jKEQ';
     //var viewer = new Cesium.Viewer('mapbox');
-    var terrainProvider = new Cesium.CesiumTerrainProvider({url: "http://111.202.109.210:8080/tms/1.0.0/gujiaodem_terrain@EPSG:4326@terrain"});
+    var terrainProvider = new Cesium.CesiumTerrainProvider({url: geoserver+"/tms/1.0.0/gujiaodem_terrain@EPSG:4326@terrain"});
     //var terrainProvider = Cesium.createWorldTerrain();
     var viewer = new Cesium.Viewer('mapbox', {
         terrainProvider : terrainProvider
