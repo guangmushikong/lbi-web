@@ -32,13 +32,10 @@
         <div class="container">
             <section class="content">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="box box-widget widget-user-2">
                             <a href="/meta">
                                 <div class="widget-user-header bg-green">
-                                    <!--<div class="widget-user-image">
-                                        <img class="img-circle" src="/assets/img/gdps4.png">
-                                    </div>-->
                                     <h3 class="widget-user-username">元数据</h3>
                                     <h5 class="widget-user-desc">元数据展示，业务数据展示</h5>
                                 </div>
@@ -46,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="box box-widget widget-user-2">
                             <a href="/admin">
                                 <div class="widget-user-header bg-aqua">
@@ -56,6 +53,18 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="box box-widget widget-user-2">
+                            <a th:href="@{apidoc}">
+                                <div class="widget-user-header bg-blue">
+                                    <h3 class="widget-user-username">文档</h3>
+                                    <h5 class="widget-user-desc">服务Restful接口文档</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </div><!-- /.container -->

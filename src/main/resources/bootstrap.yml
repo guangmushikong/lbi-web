@@ -3,7 +3,7 @@ spring:
     name: lbi-web
   cloud:
     config:
-      name: lbiweb,dbconfig
+      name: lbi-web,database-config
       profile: dev
       discovery:
         enabled: true
@@ -22,4 +22,4 @@ eureka:
     status-page-url-path: /
   client:
     serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:11111/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.15.43:11111/eureka/

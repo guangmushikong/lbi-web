@@ -6,10 +6,15 @@
  **************************************/
 package com.lbi.tile.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /*************************************
  * Class Name: PageController
@@ -20,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
  ************************************/
 @Controller
 public class PageController {
+    @Autowired
+    DiscoveryClient discoveryClient;
     /**
      * 首页
      */
@@ -37,6 +44,20 @@ public class PageController {
     }
 
     /**
+     * 接口文件
+     */
+    @RequestMapping("/apidoc")
+    public ModelAndView apidoc(){
+        List<ServiceInstance> list = discoveryClient.getInstances("LBS-SERVER");
+        if(!list.isEmpty()){
+            ServiceInstance instance=list.get(0);
+            ModelAndView mav=new ModelAndView("redirect:"+instance.getUri()+"/swagger-ui.html");
+            return mav;
+        }
+        return null;
+    }
+
+    /**
      * 元数据
      */
     @RequestMapping("/meta")
@@ -50,6 +71,18 @@ public class PageController {
             @RequestParam(value = "y",required=false, defaultValue="0.0") double y,
             @RequestParam(value = "z",required=false, defaultValue="0") int z){
         ModelAndView mav = new ModelAndView("meta/loc");
+        mav.addObject("x", x);
+        mav.addObject("y", y);
+        mav.addObject("z", z);
+        return mav;
+    }
+
+    @RequestMapping("/meta/cesium")
+    public ModelAndView cesium(
+            @RequestParam(value = "x",required=false, defaultValue="0.0") double x,
+            @RequestParam(value = "y",required=false, defaultValue="0.0") double y,
+            @RequestParam(value = "z",required=false, defaultValue="0") int z){
+        ModelAndView mav = new ModelAndView("meta/cesium");
         mav.addObject("x", x);
         mav.addObject("y", y);
         mav.addObject("z", z);
