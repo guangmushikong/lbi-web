@@ -14,8 +14,8 @@ public interface RefactorLBSServer {
     @GetMapping("/projects/{projectId}")
     ResultBody getProject(@PathVariable("projectId") long projectId);
 
-    @GetMapping("/projects/datasets")
-    ResultBody getAllatasetList();
+    @GetMapping("/projects/{projectId}/alldatasets")
+    ResultBody getAllatasetList(@PathVariable("projectId") long projectId);
 
     @GetMapping("/projects/{projectId}/datasets/{datasetId}")
     ResultBody getDataset(

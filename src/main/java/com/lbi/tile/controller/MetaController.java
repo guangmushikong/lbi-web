@@ -21,18 +21,17 @@ public class MetaController {
     @RequestMapping(value="/projects/{projectId}", method = RequestMethod.GET)
     public ResultBody getProjectById(@PathVariable("projectId") long projectId) {
         return refactorLBSServer.getProject(projectId);
-
     }
 
     @RequestMapping(value="/datasets", method = RequestMethod.GET)
     public ResultBody getDateSetList() {
-        return refactorLBSServer.getAllatasetList();
+        return refactorLBSServer.getAllatasetList(0L);
     }
 
     @RequestMapping(value="/datasets/{datasetId}", method = RequestMethod.GET)
     public ResultBody getDataSetDOById(
             @PathVariable("datasetId") long datasetId) {
-        return refactorLBSServer.getDataset(0,datasetId);
+        return refactorLBSServer.getDataset(0L,datasetId);
     }
 
 
