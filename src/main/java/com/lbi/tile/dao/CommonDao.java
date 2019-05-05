@@ -4,13 +4,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class CommonDao {
-    //@Resource(name="jdbcTemplate")
     @Autowired
     JdbcTemplate jdbcTemplate;
 
