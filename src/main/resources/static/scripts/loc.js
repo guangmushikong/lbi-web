@@ -37,6 +37,8 @@ function initCity(){
 
 function initOverlays(){
     var gujiao_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/gujiao/{x}/{y}/{z}.png', {maxZoom: 17});
+    var beijing_overlay_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/1.0.0/beijing_satellite_overlay@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 18});
+    var beijing_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/1.0.0/beijing_satellite_raster@EPSG:900913@jpeg/{x}/{y}/{z}.jpg', {maxZoom: 18});
     var jingzhuang_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/1.0.0/jingzhuang_satellite_raster@EPSG:900913@png/{x}/{y}/{z}.png', {maxZoom: 17});
     var world_satellite_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/world/{x}/{y}/{z}.jpeg', {maxZoom: 13});
     var china_city_xyz_png_Layer = L.tileLayer(geoserver+'/xyz/city/{x}/{y}/{z}.png', {maxZoom: 13});
@@ -74,6 +76,8 @@ function initOverlays(){
         '世界卫星影像':world_satellite_tms_png_Layer,
         '中国城市面':china_city_tms_png_Layer,
         '六盘水轨迹':liupanshui_track_xyz_png_Layer,
+        '北京影像叠加':beijing_overlay_xyz_png_Layer,
+        '北京卫星影像':beijing_satellite_xyz_png_Layer,
         '古交高分影像':gujiao_satellite_tms_png_Layer,
         '静庄高分影像':jingzhuang_satellite_tms_png_Layer,
         '六盘水高分影像':liupanshui_satellite_tms_png_Layer,
