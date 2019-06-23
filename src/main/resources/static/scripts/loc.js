@@ -1,7 +1,7 @@
 var mapObj;
 var cityList;
 var commonstyle;
-var geoserver="http://111.202.109.210:8080";
+var geoserver="http://111.202.109.211:8080";
 var xyMarker;
 function init(){
     resizeMap();

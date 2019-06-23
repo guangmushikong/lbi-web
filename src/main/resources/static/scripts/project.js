@@ -1,6 +1,11 @@
-
+var geoserver="http://111.202.109.211:8080";
 var table;
+var token;
 function init(){
+    token=$.cookie('token');
+    if(token==null){
+        window.location.replace("/login");
+    }
     initTable();
     loadData();
 }
@@ -35,23 +40,26 @@ function initTable(){
             }
         }
     });
-
-
 }
 function loadData(){
-    $.get(
-        "/meta/projects",
-        function(json){
+    $.ajax({
+        type: "GET",
+        headers: {
+            Authorization: token
+        },
+        url: geoserver+"/projects",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (json) {
             if(json.success){
                 var list=json.data;
                 table.clear();
                 for(var i=0;i<list.length;i++){
                     var item=list[i];
                     table.row.add(item);
-                    console.log(item);
                 }
-                table.draw();
-                
             }
-        },"json");
+            table.draw();
+        }
+    });
 }

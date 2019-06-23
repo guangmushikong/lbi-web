@@ -1,37 +1,52 @@
-var geoserver;
+var geoserver="http://111.202.109.211:8080";
 var params;
 function init(){
-    geoserver="http://111.202.109.210:8080";
-	//initMapList();
+    token=$.cookie('token');
+    if(token==null){
+        window.location.replace("/login");
+    }
 	params=GetRequest();
 	loadMapDesc();
 	loadMapSets();
 }
 function loadMapDesc(){
-	$.get(
-        geoserver+"/meta/maps/"+params["mapid"],
-        function(json){
+    $.ajax({
+        type: "GET",
+        headers: {
+            Authorization: token
+        },
+        url: geoserver+"/meta/maps/"+params["mapid"],
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (json) {
             if(json.success){
                 var data=json.data;
                 console.log(data);
                 $("#m_name").text(data.title);
-    			$("#m_comment").text(data.abstract);
-    			if(data.serviceId==2){
-			        $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>TMS</li>');
-			    }else{
-			        $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>XYZ</li>');
-			    }
-    			$("#m_props").append('<li class="list-group-item"><b>SRS：</b>'+data.srs+'</li>');
-    			$("#m_props").append('<li class="list-group-item"><b>Profile：</b>'+data.profile+'</li>');
-    			$("#m_props").append('<li class="list-group-item"><b>MimeType：</b>'+data.mimeType+'</li>');
-    			initMap(data);
+                $("#m_comment").text(data.abstract);
+                if(data.serviceId==2){
+                    $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>TMS</li>');
+                }else{
+                    $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>XYZ</li>');
+                }
+                $("#m_props").append('<li class="list-group-item"><b>SRS：</b>'+data.srs+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>Profile：</b>'+data.profile+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>MimeType：</b>'+data.mimeType+'</li>');
+                initMap(data);
             }
-        },"json");
+        }
+    });
 }
 function loadMapSets(){
-    $.get(
-        geoserver+"/meta/maps/"+params["mapid"]+"/mapsets",
-        function(json){
+    $.ajax({
+        type: "GET",
+        headers: {
+            Authorization: token
+        },
+        url: geoserver+"/meta/maps/"+params["mapid"]+"/mapsets",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (json) {
             if(json.success){
                 var list=json.data;
                 $("#maplist tbody").empty();
@@ -45,11 +60,11 @@ function loadMapSets(){
                     tr+='<td>'+item.sortOrder+'</td>';
                     tr+='</tr>';
                     $("#maplist tbody").append(tr);
-                    
+
                 }
-                
             }
-        },"json");
+        }
+    });
 }
 function initMap(json){
 	var basemap;

@@ -1,9 +1,24 @@
-var geoserver;
+var geoserver="http://111.202.109.211:8080";
 var table;
+var token;
 function init(){
-    geoserver="http://111.202.109.210:8080";
+    token=$.cookie('token');
+    if(token==null){
+        window.location.replace("/login");
+    }
+    $("#m_serviceId").select2();
+    $("#m_layerGroup").select2();
 	initMapTable();
 	loadMapList();
+    $("#m_layerGroup").change(function() {
+        table.column(3).search($("#m_layerGroup").val()).draw();
+    });
+    $("#m_serviceId").change(function() {
+        table.column(4).search($("#m_serviceId").val()).draw();
+    });
+    $('#filter_word').on('keyup click',function () {
+        table.search($('#filter_word').val()).draw();
+    });
 }
 function initMapTable(){
 	table= $('#maplist').DataTable({
@@ -18,7 +33,7 @@ function initMapTable(){
 			    "defaultContent": '',
 			    "width":"5"
 			},
-            {"data": "id","title":"ID","width":"20","orderable":false},
+            {"data": "id","title":"ID","width":"20"},
             {"data": null,"title":"图层名","width":"150",
                 "render":function(d){
                     if(d.abstract!=null)return '<span title="'+d.abstract + '">'+d.title+'</span>';
@@ -26,15 +41,14 @@ function initMapTable(){
                 }},
             {"data": "group","title":"图层组","width":"40"},
             {"data": null,"title":"协议","width":"100",
-            		
-            		"orderable":false,
+            	"orderable":false,
                 "render":function(d){
                     if(d.serviceId==1)return 'XYZ';
                     else return 'TMS';
                 }},
-            {"data": "srs","title":"空间参考","width":"100"},
-            {"data": "profile","title":"坐标系<button type='button' class='btn btn-default btn-sm' data-toggle='tooltip' title='mercator墨卡托投影坐标系,geodetic大地坐标系'><i class='fa fa-question'></i></button>","width":"100"},
-            {"data": "mimeType","title":"MimeType","width":"100"},
+            {"data": "srs","title":"空间参考","width":"100","orderable":false},
+            {"data": "profile","title":"坐标系<button type='button' class='btn btn-default btn-sm' data-toggle='tooltip' title='mercator墨卡托投影坐标系,geodetic大地坐标系'><i class='fa fa-question'></i></button>","width":"100","orderable":false},
+            {"data": "mimeType","title":"MimeType","width":"100","orderable":false},
             {"data": "minZoom","title":"最小级别","width":"100","orderable":false},
             {"data": "maxZoom","title":"最大级别","width":"100","orderable":false},
             {
@@ -106,21 +120,26 @@ function initMapTable(){
     });
 }
 function loadMapList(){
-    $.get(
-        geoserver+"/meta/maps",
-        function(json){
+    $.ajax({
+        type: "GET",
+        headers: {
+            Authorization: token
+        },
+        url: geoserver+"/meta/maps",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (json) {
             if(json.success){
                 var list=json.data;
                 table.clear();
                 for(var i=0;i<list.length;i++){
                     var item=list[i];
                     table.row.add(item);
-                    //console.log(item);
                 }
-                table.draw();
-                
             }
-        },"json");
+            table.draw();
+        }
+    });
 }
 //显示记录详情
 function format (d) {

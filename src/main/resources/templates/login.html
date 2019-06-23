@@ -14,10 +14,6 @@
   <!-- Theme style -->
   <link th:href="@{/assets/AdminLTE/css/AdminLTE.min.css}" rel="stylesheet"/>
   <link th:href="@{/assets/AdminLTE/css/skins/_all-skins.min.css}" rel="stylesheet"/>
-
-
-  <!-- Google Font -->
-  <!--<link rel="stylesheet" href="css/css.css">-->
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -41,11 +37,9 @@
       </div>
       <div class="row">
         <div class="col-xs-8"></div>
-        <!-- /.col -->
         <div class="col-xs-4">
-          <input type="submit" id="login" value="登录" class="btn btn-primary"/>
+          <input type="button" id="login" value="登录" class="btn btn-primary" onclick="denglu()"/>
         </div>
-        <!-- /.col -->
       </div>
     </form>
 
@@ -58,6 +52,7 @@
 
 <!-- jQuery 3 -->
 <script th:src="@{/assets/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/jquery/jquery.cookie.js}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 
