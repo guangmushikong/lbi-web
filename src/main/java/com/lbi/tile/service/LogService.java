@@ -3,6 +3,7 @@ package com.lbi.tile.service;
 import com.lbi.tile.dao.LogDao;
 import com.lbi.tile.model.Stat;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 
-@Service("logService")
+@Service
 public class LogService {
-    @Resource(name="logDao")
+    @Autowired
     private LogDao logDao;
 
     @Value("${spring.table.t_log}")
@@ -105,13 +106,6 @@ public class LogService {
         sb.append(" group by ip,to_char(log_time,'yyyymmdd')");
         sb.append(") t2 on t1.ip=t2.ip and t1.time=t2.time");
 
-        /*StringBuilder sb=new StringBuilder();
-        sb.append("select ip,to_char(log_time,'yyyymmdd') as time,count(1) as total");
-        sb.append(" from t_log where to_char(log_time,'yyyymmdd')::bigint>="+ds);
-        String ipSql=getTopIP(ds,3,1);
-        sb.append(" and ip in ("+ipSql+")");
-        sb.append(" group by ip,to_char(log_time,'yyyymmdd')");
-        sb.append(" order by ip,to_char(log_time,'yyyymmdd')");*/
         return sb.toString();
     }
 

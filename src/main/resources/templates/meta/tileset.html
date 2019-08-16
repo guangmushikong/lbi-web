@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Map</title>
+    <title>瓦片数据集</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -10,7 +10,7 @@
 	<link th:href="@{/assets/Ionicons/css/ionicons.min.css}" rel="stylesheet"/>
 	<link th:href="@{/assets/AdminLTE/css/AdminLTE.min.css}" rel="stylesheet"/>
 	<link th:href="@{/assets/AdminLTE/css/skins/_all-skins.min.css}" rel="stylesheet"/>
-	<link th:href="@{/assets/css/leaflet.css}" rel="stylesheet"/>
+
 
 </head>
 <body class="hold-transition skin-yellow-light sidebar-collapse sidebar-mini" onload="init()">
@@ -34,6 +34,9 @@
 					<div class="box table-responsive">
 						<div class="box-header with-border">
 							<i class="fa fa-th"></i><h3 class="box-title">TileSet</h3>
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-add">新增</button>
+							</div>
 						</div>
 						<div class="box-body">
 							<table class="table table-bordered" id="maplist">
@@ -41,32 +44,63 @@
 								<tr>
 									<th>ID</th>
 									<th>Href</th>
-									<th>Scale</th>
-									<th>Sort</th>
+									<th>地面分辨率</th>
+									<th>级别</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
 						</table>
 						</div>
 					</div>
-					<div class="box">
-						<div class="box-header with-border">
-							<i class="fa fa-th"></i><h3 class="box-title">Map</h3>
-						</div>
-						<div class="box-body">
-							<div id="mapbox" style="width:100%;height:300px;"></div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</section>
+		<div class="modal modal-primary fade" id="modal-add">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">新增瓦片数据集</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">地面分辨率</label>
+								<div class="col-sm-8">
+									<input id="m_perPixel" class="form-control" placeholder="输入地面分辨率" value="156543.03390000000945" disabled="true"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">排列序号</label>
+								<div class="col-sm-8">
+									<input id="m_order" class="form-control" placeholder="1" value="0" type="number" min=0 max=23 step=1 />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" onclick="addTileSet()">保存</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
     </div><!-- ./content-wrapper -->
 	<footer class="main-footer" th:include="common :: footer"></footer>
 </div><!-- ./wrapper -->
 <input type="hidden" id="m_mapserver" th:value="${mapserver}"/>
+<input type="hidden" id="m_mapId" th:value="${mapId}"/>
 </body>
 <script th:src="@{/assets/jquery/jquery.min.js}"></script>
-<script th:src="@{/assets/leaflet0.7/js/leaflet.js}"></script>
-<script th:src="@{/scripts/mapsets.js}"></script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/assets/fastclick/fastclick.js}"></script>
+<script th:src="@{/assets/AdminLTE/js/adminlte.min.js}"></script>
+
+<script th:src="@{/scripts/tileset.js}"></script>
 </html>

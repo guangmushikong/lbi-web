@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
-@Repository(value="logDao")
+@Repository
 @Slf4j
 public class LogDao extends CommonDao{
     @Value("${spring.table.t_log}")

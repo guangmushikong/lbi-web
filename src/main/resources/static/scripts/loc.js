@@ -1,38 +1,32 @@
 var mapObj;
 var cityList;
 var commonstyle;
-var geoserver="http://111.202.109.211:8080";
+var geoserver;
 var xyMarker;
 function init(){
+    geoserver=$("#m_mapserver").val();
     resizeMap();
     initCommonStyle();
     initMap();
-    getRemoteIP();
 }
 
 function initCity(){
-    $.get(
-        "/city/getcitylist.json",
-        function(json){
-            if(json.success){
-                var list=json.data;
-                list.push({adcode:"111",name:"古交",x:111.69073008803707,y:37.59651465252423,minX:111.69073008803707,minY:37.59651465252423,maxX:112.50720463078976,maxY:38.25637888992949});
-                list.push({adcode:"112",name:"静庄",x:104.77085056787423,y:35.10560793684285,minX:104.77085056787423,minY:35.10560793684285,maxX:105.14244032110284,maxY:35.58053135312061});
-                list.push({adcode:"113",name:"云南",x:103.37809033219204,y:26.92051250519370,minX:103.37809033219204,minY:26.92051250519370,maxX:103.65317576522527,maxY:27.16169880229407});
-                cityList=[];
-                for(var i=0;i<list.length;i++){
-                    var item=list[i];
-                    cityList[item.adcode]=item;
-                    var li='<option value="'+item.adcode+'"><i class="icon-star"></i>'+item.name+'</option>';
-                    $("#m_city").append(li);
-                }
-                $("#m_city").select2();
-                $('#m_city').change(function(){
-                    var item=cityList[$('#m_city').val()];
-                    mapObj.fitBounds([[item.minY,item.minX],[item.maxY, item.maxX]]);
-                });
-            }
-        },"json");
+    cityList=[];
+    cityjson.push({adcode:"111",name:"古交",x:111.69073008803707,y:37.59651465252423,minx:111.69073008803707,miny:37.59651465252423,maxx:112.50720463078976,maxy:38.25637888992949});
+    cityjson.push({adcode:"112",name:"静庄",x:104.77085056787423,y:35.10560793684285,minx:104.77085056787423,miny:35.10560793684285,maxx:105.14244032110284,maxy:35.58053135312061});
+    cityjson.push({adcode:"113",name:"云南",x:103.37809033219204,y:26.92051250519370,minx:103.37809033219204,miny:26.92051250519370,maxx:103.65317576522527,maxy:27.16169880229407});
+
+    for(var i=0;i<cityjson.length;i++){
+        var item=cityjson[i];
+        cityList[item.adcode]=item;
+        var li='<option value="'+item.adcode+'"><i class="icon-star"></i>'+item.name+'</option>';
+        $("#m_city").append(li);
+    }
+    $("#m_city").select2();
+    $('#m_city').change(function(){
+        var item=cityList[$('#m_city').val()];
+        mapObj.fitBounds([[item.miny,item.minx],[item.maxy, item.maxx]]);
+    });
 }
 
 function initOverlays(){
@@ -163,9 +157,7 @@ function locationByXY(){
     xyMarker=new L.Marker(latlng,{icon:svgIcon}).addTo(mapObj);
     mapObj.setView(latlng);
 }
-function getRemoteIP(){
-    $("#m_ip").text("您的访问IP:"+returnCitySN["cip"]);
-}
+
 function initCommonStyle(){
     commonstyle={};
     var myStyle={

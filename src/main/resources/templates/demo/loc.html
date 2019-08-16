@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cesium示例地图</title>
+    <title>Leaflet示例地图</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
@@ -9,8 +9,10 @@
     <link th:href="@{/assets/Ionicons/css/ionicons.min.css}" rel="stylesheet"/>
     <link th:href="@{/assets/AdminLTE/css/AdminLTE.min.css}" rel="stylesheet"/>
     <link th:href="@{/assets/AdminLTE/css/skins/_all-skins.min.css}" rel="stylesheet"/>
-    <link href="https://cesiumjs.org/releases/1.55/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
-    <script src="https://cesiumjs.org/releases/1.55/Build/Cesium/Cesium.js"></script>
+    <link th:href="@{/assets/css/leaflet.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/leaflet.label.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/select2.css}" rel="stylesheet"/>
+    <link th:href="@{/assets/css/loc.css}" rel="stylesheet"/>
 </head>
 <body class="hold-transition skin-yellow-light sidebar-collapse sidebar-mini" onload="init()">
 <div class="wrapper">
@@ -20,7 +22,12 @@
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
-                    <i class="fa fa-empire"></i> <h3 class="box-title">Cesium示例地图</h3>
+                    <i class="fa fa-jsfiddle"></i> <h3 class="box-title">Leaflet地图</h3>
+                    <div class="box-tools pull-right">
+                        <input type="text" class="input-sm" placeholder="请输入经度" id="m_x" style="width:100px"/>
+                        <input type="text" class="input-sm" placeholder="请输入纬度" id="m_y" style="width:100px"/>
+                        <button type="button" class="btn btn-warning btn-flat" onclick="locationByXY()"><i class="fa fa-map-marker"></i>&nbsp;定位</button>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div id="mapbox" style="width: 100%; height:100%;"></div>
@@ -40,13 +47,21 @@
 <input type="hidden" id="m_cenx" th:value="${x}"/>
 <input type="hidden" id="m_ceny" th:value="${y}"/>
 <input type="hidden" id="m_cenz" th:value="${z}"/>
+<input type="hidden" id="m_mapserver" th:value="${mapserver}"/>
 </body>
 <script th:src="@{/assets/jquery/jquery.min.js}"></script>
 <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/assets/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 <script th:src="@{/assets/fastclick/fastclick.js}"></script>
 <script th:src="@{/assets/AdminLTE/js/adminlte.min.js}"></script>
+<script th:src="@{/assets/leaflet0.7/js/leaflet.js}"></script>
+<script th:src="@{/assets/leaflet.label/leaflet.label.js}"></script>
+<script th:src="@{/assets/leaflet0.7/js/TileLayer.GeoJSON.js}"></script>
+<script th:src="@{/assets/leaflet-svgicon/svg-icon.js}"></script>
+<script th:src="@{/assets/select2/js/select2.js}"></script>
+<!--<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>-->
 
-<script th:src="@{/scripts/cesium_map.js}"></script>
+<script th:src="@{/scripts/citylist.js}"></script>
+<script th:src="@{/scripts/loc.js}"></script>
 
 </html>

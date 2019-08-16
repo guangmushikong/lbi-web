@@ -1,12 +1,7 @@
-/**************************************
- * Copyright (C), Navinfo
- * Package: com.lbi.tile.controller
- * Author: liumingkai05559
- * Date: Created in 2018/8/12 16:59
- **************************************/
 package com.lbi.tile.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
@@ -19,14 +14,16 @@ import java.util.List;
 /*************************************
  * Class Name: PageController
  * Description:〈页面控制器〉
- * @author liumingkai
- * @create 2018/8/12
+ * @author deyi
  * @since 1.0.0
  ************************************/
 @Controller
 public class PageController {
     @Autowired
     DiscoveryClient discoveryClient;
+
+    @Value("${service.mapserver}")
+    String mapserver;
     /**
      * 首页
      */
@@ -65,6 +62,14 @@ public class PageController {
         return "meta";
     }
 
+    /**
+     * 示例
+     */
+    @RequestMapping("/demo")
+    public String demo(){
+        return "demo";
+    }
+
     @RequestMapping("/meta/loc")
     public ModelAndView loc(
             @RequestParam(value = "x",required=false, defaultValue="0.0") double x,
@@ -74,6 +79,7 @@ public class PageController {
         mav.addObject("x", x);
         mav.addObject("y", y);
         mav.addObject("z", z);
+        mav.addObject("mapserver", mapserver);
         return mav;
     }
 
@@ -86,26 +92,50 @@ public class PageController {
         mav.addObject("x", x);
         mav.addObject("y", y);
         mav.addObject("z", z);
+        mav.addObject("mapserver", mapserver);
         return mav;
     }
 
     @RequestMapping("/meta/dataset")
-    public String dataset(){
-        return "meta/dataset";
+    public ModelAndView dataset(){
+        ModelAndView mav = new ModelAndView("meta/dataset");
+        mav.addObject("mapserver", mapserver);
+        return mav;
     }
     @RequestMapping("/meta/project")
-    public String project(){
-        return "meta/project";
+    public ModelAndView project(){
+        ModelAndView mav = new ModelAndView("meta/project");
+        mav.addObject("mapserver", mapserver);
+        return mav;
     }
 
-    @RequestMapping("/meta/directory")
-    public String directory(){
-        return "meta/directory";
+    @RequestMapping("/meta/user")
+    public ModelAndView user(){
+        ModelAndView mav = new ModelAndView("meta/user");
+        mav.addObject("mapserver", mapserver);
+        return mav;
+    }
+
+    @RequestMapping("/meta/tilemap")
+    public ModelAndView tilemap(){
+        ModelAndView mav = new ModelAndView("meta/tilemap");
+        mav.addObject("mapserver", mapserver);
+        return mav;
+    }
+
+    @RequestMapping("/meta/tileset")
+    public ModelAndView tileset(@RequestParam("mapId") long mapId){
+        ModelAndView mav = new ModelAndView("meta/tileset");
+        mav.addObject("mapserver", mapserver);
+        mav.addObject("mapId", mapId);
+        return mav;
     }
 
     @RequestMapping("/meta/mapsets")
-    public String mapsets(){
-        return "meta/mapsets";
+    public ModelAndView mapsets(){
+        ModelAndView mav = new ModelAndView("meta/mapsets");
+        mav.addObject("mapserver", mapserver);
+        return mav;
     }
 
     @RequestMapping("/admin")

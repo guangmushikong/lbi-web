@@ -1,5 +1,7 @@
-var geoserver="http://111.202.109.211:8080";
+
+var geoserver;
 function init(){
+    geoserver=$("#m_mapserver").val();
     resizeMap();
     initMap();
 }

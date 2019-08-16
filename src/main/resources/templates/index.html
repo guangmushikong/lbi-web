@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>八千云 - 数据门户</title>
-    <link rel="icon" href="/favicon.ico">
     <link th:href="@{/favicon.ico}" rel="icon" >
     <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
@@ -34,10 +33,10 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="box box-widget widget-user-2">
-                            <a href="/meta">
+                            <a th:href="@{/meta}">
                                 <div class="widget-user-header bg-green">
                                     <h3 class="widget-user-username">元数据</h3>
-                                    <h5 class="widget-user-desc">元数据展示，业务数据展示</h5>
+                                    <h5 class="widget-user-desc">元数据管理</h5>
                                 </div>
                             </a>
                         </div>
@@ -45,7 +44,18 @@
 
                     <div class="col-md-4">
                         <div class="box box-widget widget-user-2">
-                            <a href="/admin">
+                            <a th:href="@{/demo}">
+                                <div class="widget-user-header bg-yellow">
+                                    <h3 class="widget-user-username">示例</h3>
+                                    <h5 class="widget-user-desc">业务数据展示</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="box box-widget widget-user-2">
+                            <a th:href="@{/admin}">
                                 <div class="widget-user-header bg-aqua">
                                     <h3 class="widget-user-username">后台管理</h3>
                                     <h5 class="widget-user-desc">后台管理</h5>
@@ -64,7 +74,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
             </section>
         </div><!-- /.container -->

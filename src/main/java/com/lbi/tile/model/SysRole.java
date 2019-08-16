@@ -4,21 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /*************************************
- * Class Name: CityDO
- * Description:〈城市对象〉
+ * Class Name: SysRole
+ * Description:〈系统角色〉
  * @author deyi
- * @create 2019/6/11
  * @since 1.0.0
  ************************************/
 @Getter
 @Setter
-public class CityDO {
-    String adcode;
+public class SysRole {
+    Long id;
     String name;
-    double x;
-    double y;
-    double minX;
-    double minY;
-    double maxX;
-    double maxY;
 }

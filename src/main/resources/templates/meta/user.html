@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>项目</title>
+    <title>用户</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -22,14 +22,14 @@
         <section class="content">
             <div class="box">
                 <div class="box-header with-border">
-                    <i class="fa fa-cube"></i> <h3 class="box-title">项目</h3>
+                    <i class="fa fa-user"></i> <h3 class="box-title">用户</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#modal-add">新增</button>
                     </div>
                 </div>
                 <div class="box-body table-responsive">
                     <div class="mailbox-controls">
-                        <table class="table table-bordered" id="projectlist">
+                        <table class="table table-bordered" id="userlist">
                         </table>
                     </div>
                 </div>
@@ -42,36 +42,68 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">新增项目</h4>
+                        <h4 class="modal-title">新增用户</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">名称</label>
                                 <div class="col-sm-8">
-                                    <input id="m_name" class="form-control" placeholder="输入名称"/>
+                                    <input id="m_username" class="form-control" placeholder="输入名称"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">备注</label>
+                                <label class="col-sm-4 control-label">密码</label>
                                 <div class="col-sm-8">
-                                    <input id="m_memo" class="form-control" placeholder="输入备注"/>
+                                    <input id="m_password" class="form-control" placeholder="输入密码"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">数据集ID</label>
+                                <label class="col-sm-4 control-label">昵称</label>
                                 <div class="col-sm-8">
-                                    <input id="m_datasetids" class="form-control" placeholder="输入数据集ID"/>
+                                    <input id="m_nick" class="form-control" placeholder="输入昵称"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">手机</label>
+                                <div class="col-sm-8">
+                                    <input id="m_mobile" class="form-control" placeholder="输入手机"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">邮件</label>
+                                <div class="col-sm-8">
+                                    <input id="m_email" class="form-control" placeholder="输入邮件"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">角色ID</label>
+                                <div class="col-sm-8">
+                                    <input id="m_roleId" class="form-control" placeholder="输入角色ID"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">项目ID</label>
+                                <div class="col-sm-8">
+                                    <input id="m_projectIds" class="form-control" placeholder="输入项目ID"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="addProject()">保存</button>
+                        <button type="button" class="btn btn-primary" onclick="addUser()">保存</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -83,7 +115,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">编辑项目</h4>
+                        <h4 class="modal-title">编辑用户</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -98,29 +130,61 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">名称</label>
                                 <div class="col-sm-8">
-                                    <input id="m_name2" class="form-control" placeholder="输入名称"/>
+                                    <input id="m_username2" class="form-control" placeholder="输入名称"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">备注</label>
+                                <label class="col-sm-4 control-label">密码</label>
                                 <div class="col-sm-8">
-                                    <input id="m_memo2" class="form-control" placeholder="输入备注"/>
+                                    <input id="m_password2" class="form-control" placeholder="输入密码"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">数据集ID</label>
+                                <label class="col-sm-4 control-label">昵称</label>
                                 <div class="col-sm-8">
-                                    <input id="m_datasetids2" class="form-control" placeholder="输入数据集ID"/>
+                                    <input id="m_nick2" class="form-control" placeholder="输入昵称"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">手机</label>
+                                <div class="col-sm-8">
+                                    <input id="m_mobile2" class="form-control" placeholder="输入手机"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">邮件</label>
+                                <div class="col-sm-8">
+                                    <input id="m_email2" class="form-control" placeholder="输入邮件"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">角色ID</label>
+                                <div class="col-sm-8">
+                                    <input id="m_roleId2" class="form-control" placeholder="输入角色ID"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">项目ID</label>
+                                <div class="col-sm-8">
+                                    <input id="m_projectIds2" class="form-control" placeholder="输入项目ID"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="editProject()">保存</button>
+                        <button type="button" class="btn btn-primary" onclick="editUser()">保存</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -137,5 +201,5 @@
 <script th:src="@{/assets/fastclick/fastclick.js}"></script>
 <script th:src="@{/assets/AdminLTE/js/adminlte.min.js}"></script>
 <script th:src="@{/assets/jquery-dataTables/js/jquery.dataTables.min.js}"></script>
-<script th:src="@{/scripts/project.js}"></script>
+<script th:src="@{/scripts/user.js}"></script>
 </html>

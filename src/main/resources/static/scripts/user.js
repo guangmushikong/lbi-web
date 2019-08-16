@@ -6,7 +6,7 @@ function init(){
     loadData();
 }
 function initTable(){
-	table= $('#projectlist').DataTable({
+	table= $('#userlist').DataTable({
 		"data":[],
         "dom": '<"top">rt<"bottom"ip><"clear">',
         "columns": [
@@ -18,8 +18,12 @@ function initTable(){
                 "width":"5"
             },
             {"data": "id","title":"ID","width":"20"},
-            {"data": "name","title":"项目名称","width":"150"},
-            {"data": "memo","title":"备注","width":"40"},
+            {"data": "username","title":"用户","width":"150"},
+            {"data": "nick","title":"昵称","width":"40"},
+            {"data": "mobile","title":"手机","width":"100"},
+            {"data": "email","title":"邮箱","width":"100"},
+            {"data": "roleId","title":"角色ID","width":"100"},
+            {"data": "projectIds","title":"项目ID","width":"100"},
             {"data": "createTime","title":"创建时间","width":"100"},
             {"data": "modifyTime","title":"修改时间","width":"100"},
             {
@@ -52,7 +56,7 @@ function initTable(){
         }
     });
     //记录详情
-    $('#projectlist tbody').on('click', 'td.details-control', function () {
+    $('#userlist tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
 
@@ -61,32 +65,36 @@ function initTable(){
             tr.removeClass('shown');
         }else {
             // Open this row
-            format(row);
+            row.child(format(row.data()) ).show();
             tr.addClass('shown');
         }
     });
 
-    $('#projectlist tbody').on('click', 'button.btn-success', function () {
+    $('#userlist tbody').on('click', 'button.btn-success', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-        curProject(row.data());
+        curUser(row.data());
     });
-    $('#projectlist tbody').on('click', 'button.btn-danger', function () {
+    $('#userlist tbody').on('click', 'button.btn-danger', function () {
         var tr = $(this).closest('tr');
         var row = table.row(tr);
-        delProject(row.data().id);
+        delUser(row.data().id);
     });
 }
 
-function curProject(d){
+function curUser(d){
     $("#m_id2").val(d.id);
-    $("#m_name2").val(d.name);
-    $("#m_memo2").val(d.memo);
-    $("#m_datasetids2").val(d.datasetIds);
+    $("#m_username2").val(d.username);
+    $("#m_password2").val(d.password);
+    $("#m_nick2").val(d.nick);
+    $("#m_mobile2").val(d.mobile);
+    $("#m_email2").val(d.email);
+    $("#m_roleId2").val(d.roleId);
+    $("#m_projectIds2").val(d.projectIds);
 }
 function loadData(){
     $.get(
-        "/project/list",
+        "/user/list",
         function(json){
             table.clear();
             if(json.success){
@@ -103,37 +111,29 @@ function loadData(){
 }
 
 //显示记录详情
-function format (row) {
-    $.get(
-        "/dataset/list",{
-            projectId:row.data().id
-        },
-        function(json){
-            if(json.success){
-                var list=json.data;
-                var ts=[];
-                ts.push('<table cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">');
-                ts.push('<tr><th><dt>ID</dt></th><th width="100px;"><dt>名称</dt></th><th width="200px;"><dt>备注</dt></th><th><dt>分组</dt></th><th width="100px;"><dt>类型</dt></th></tr>');
-                for(var i=0;i<list.length;i++){
-                    var item=list[i];
-                    ts.push('<tr><td>'+item.id+'</td><td>'+item.name+'</td><td>'+item.memo+'</td><td>'+item.group+'</td><td>'+item.kind+'</td></tr>');
-                }
-                row.child(ts.join("")).show();
-            }
-        }
-        ,"json");
+function format (d) {
+    var ts=[];
+    ts.push('<table cellpadding="5" cellspacing="0" border="1" style="padding-left:50px;">');
+    ts.push('<tr><td width="100px;"><dt>用户</dt></td><td>'+d.username+'</td></tr>');
+    ts.push('<tr><td><dt>密码</dt></td><td>'+d.password+'</td></tr>');
+    ts.push('</table>');
+    return ts.join("");
 }
 
-function addProject(){
+function addUser(){
     $("#modal-add").modal('hide');
     var jsondata={
-        name:$("#m_name").val(),
-        memo:$("#m_memo").val(),
-        datasetIds:$("#m_datasetids").val()
+        username:$("#m_username").val(),
+        password:$("#m_password").val(),
+        nick:$("#m_nick").val(),
+        mobile:$("#m_mobile").val(),
+        email:$("#m_email").val(),
+        roleId:$("#m_roleId").val(),
+        projectIds:$("#m_projectIds").val()
     };
     $.ajax({
         type: "POST",
-        url: "/project/add",
+        url: "/user/add",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(jsondata),
         dataType: "json",
@@ -143,17 +143,21 @@ function addProject(){
     });
 }
 
-function editProject(){
+function editUser(){
     $("#modal-edit").modal('hide');
     var jsondata={
         id:$("#m_id2").val(),
-        name:$("#m_name2").val(),
-        memo:$("#m_memo2").val(),
-        datasetIds:$("#m_datasetids2").val()
+        username:$("#m_username2").val(),
+        password:$("#m_password2").val(),
+        nick:$("#m_nick2").val(),
+        mobile:$("#m_mobile2").val(),
+        email:$("#m_email2").val(),
+        roleId:$("#m_roleId2").val(),
+        projectIds:$("#m_projectIds2").val()
     };
     $.ajax({
         type: "POST",
-        url: "/project/save",
+        url: "/user/save",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(jsondata),
         dataType: "json",
@@ -163,9 +167,9 @@ function editProject(){
     });
 }
 
-function delProject(id){
+function delUser(id){
     $.get(
-        "/project/del",
+        "/user/del",
         {
             id:id
         },

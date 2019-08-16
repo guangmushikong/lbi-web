@@ -1,12 +1,12 @@
 package com.lbi.tile.controller;
 
-import com.lbi.model.ResultBody;
+import com.lbi.tile.model.ResultBody;
 import com.lbi.tile.model.Stat;
 import com.lbi.tile.service.LogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/log")
 public class LogController {
-    @Resource(name="logService")
+    @Autowired
     private LogService logService;
 
-    @RequestMapping(value="/getdaystat",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/getdaystat", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResultBody getDayStatList(@RequestParam("kind") int kind) {
         List<Stat> list=new ArrayList<>();
         if(kind==1)list=logService.getThisDayList();

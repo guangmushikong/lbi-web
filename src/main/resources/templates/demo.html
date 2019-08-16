@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>元数据</title>
+    <title>示例</title>
     <link th:href="@{/favicon.ico}" rel="icon" >
     <link th:href="@{/assets/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/assets/font-awesome/css/font-awesome.min.css}" rel="stylesheet"/>
@@ -14,8 +14,8 @@
 </head>
 <body class="hold-transition skin-yellow-light sidebar-collapse sidebar-mini">
 <div class="wrapper">
-    <header class="main-header" th:include="common :: header_meta"></header>
-    <aside class="main-sidebar" th:include="common :: sidebar_meta"></aside>
+    <header class="main-header" th:include="common :: header_demo"></header>
+    <aside class="main-sidebar" th:include="common :: sidebar_demo"></aside>
 
     <div class="content-wrapper">
         <section class="content">
@@ -23,43 +23,31 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="box box-widget widget-user-2">
-                        <a th:href="@{/meta/project}">
-                            <div class="widget-user-header bg-red">
+                        <a href="/meta/loc">
+                            <div class="widget-user-header bg-green">
                                 <div class="widget-user-image">
-                                    <img class="img-circle" src="/assets/img/gdps1.png">
+                                    <img class="img-circle" src="/assets/img/gdps4.png">
                                 </div>
-                                <h3 class="widget-user-username">项目列表</h3>
-                                <h5 class="widget-user-desc">项目相关信息</h5>
+                                <h3 class="widget-user-username">Leaflet地图</h3>
+                                <h5 class="widget-user-desc">Leaflet示例地图</h5>
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="box box-widget widget-user-2">
-                        <a th:href="@{/meta/dataset}">
-                            <div class="widget-user-header bg-yellow">
+                        <a href="/meta/cesium">
+                            <div class="widget-user-header bg-green-active">
                                 <div class="widget-user-image">
-                                    <img class="img-circle" src="/assets/img/gdps2.png">
+                                    <img class="img-circle" src="/assets/img/gdps5.png">
                                 </div>
-                                <h3 class="widget-user-username">数据集</h3>
-                                <h5 class="widget-user-desc">数据集相关信息</h5>
+                                <h3 class="widget-user-username">Cesium地图</h3>
+                                <h5 class="widget-user-desc">Cesium示例地图</h5>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="box box-widget widget-user-2">
-                        <a th:href="@{/meta/tilemap}">
-                            <div class="widget-user-header bg-aqua">
-                                <div class="widget-user-image">
-                                    <img class="img-circle" src="/assets/img/gdps3.png">
-                                </div>
-                                <h3 class="widget-user-username">瓦片地图</h3>
-                                <h5 class="widget-user-desc">瓦片地图服务</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+
             </div>
 
         </section>

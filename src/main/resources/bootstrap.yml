@@ -8,13 +8,12 @@ spring:
       discovery:
         enabled: true
         service-id: config-server
-  mvc:
-    favicon:
-      enabled: true
   security:
     user:
       name: AKIAPYRXF3VSENILA42Q
       password: e3iNcgZ+nuVjnfzHQq2HHxoZd3VySliXyG6vFruP
+service:
+  mapserver: http://localhost:8080
 eureka:
   instance:
     prefer-ip-address: true
@@ -22,4 +21,4 @@ eureka:
     status-page-url-path: /
   client:
     serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.15.43:11111/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:11111/eureka/

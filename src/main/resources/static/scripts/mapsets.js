@@ -1,16 +1,35 @@
-var geoserver="http://111.202.109.211:8080";
+var geoserver;
 var params;
 function init(){
-    token=$.cookie('token');
-    if(token==null){
-        window.location.replace("/login");
-    }
+    geoserver=$("#m_mapserver").val();
 	params=GetRequest();
 	loadMapDesc();
 	loadMapSets();
 }
 function loadMapDesc(){
-    $.ajax({
+    $.get(
+        "/tilemap/get",{
+            id:params["mapid"]
+        },
+        function(json){
+            if(json.success){
+                var data=json.data;
+                console.log(data);
+                $("#m_name").text(data.title);
+                $("#m_comment").text(data.abstract);
+                if(data.serviceId==2){
+                    $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>TMS</li>');
+                }else{
+                    $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>XYZ</li>');
+                }
+                $("#m_props").append('<li class="list-group-item"><b>SRS：</b>'+data.srs+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>Profile：</b>'+data.profile+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>MimeType：</b>'+data.mimeType+'</li>');
+                initMap(data);
+            }
+        }
+        ,"json");
+    /*$.ajax({
         type: "GET",
         headers: {
             Authorization: token
@@ -35,10 +54,34 @@ function loadMapDesc(){
                 initMap(data);
             }
         }
-    });
+    });*/
 }
 function loadMapSets(){
-    $.ajax({
+    $.get(
+        "/tileset/list",{
+            mapId:params["mapid"]
+        },
+        function(json){
+            if(json.success){
+                var list=json.data;
+                $("#maplist tbody").empty();
+                for(var i=0;i<list.length;i++){
+                    var item=list[i];
+                    //console.log(item);
+                    var tr='<tr>';
+                    tr+='<td>'+item.id+'</td>';
+                    tr+='<td>'+item.href+'</td>';
+                    tr+='<td>'+item.unitsPerPixel+'</td>';
+                    tr+='<td>'+item.sortOrder+'</td>';
+                    tr+='</tr>';
+                    $("#maplist tbody").append(tr);
+
+                }
+            }
+
+        }
+        ,"json");
+    /*$.ajax({
         type: "GET",
         headers: {
             Authorization: token
@@ -64,7 +107,7 @@ function loadMapSets(){
                 }
             }
         }
-    });
+    });*/
 }
 function initMap(json){
 	var basemap;
