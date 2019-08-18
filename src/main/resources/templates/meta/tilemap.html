@@ -51,15 +51,15 @@
                         <form class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">标题</label>
+                                    <label class="col-sm-2 control-label">名称</label>
                                     <div class="col-sm-10">
-                                        <input id="m_title" class="form-control" placeholder="输入标题"/>
+                                        <input id="m_name" class="form-control" placeholder="输入名称"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">摘要</label>
+                                    <label class="col-sm-2 control-label">备注</label>
                                     <div class="col-sm-10">
-                                        <input id="m_abstract" class="form-control" placeholder="输入摘要"/>
+                                        <input id="m_memo" class="form-control" placeholder="输入备注"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -69,23 +69,43 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">图层组</label>
-                                    <div class="col-sm-4">
-                                        <select id="m_group" class="select2"></select>
-                                    </div>
-                                    <label class="col-sm-2 control-label">图层种类</label>
-                                    <div class="col-sm-4">
-                                        <select id="m_kind" class="select2"></select>
+                                    <label class="col-sm-2 control-label">图层分组</label>
+                                    <div class="col-sm-10">
+                                        <select id="m_group" class="select2" style="width:160px;"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">空间参考</label>
-                                    <div class="col-sm-4">
-                                        <input id="m_srs" class="form-control" placeholder="输入空间参考"/>
+                                    <label class="col-sm-2 control-label">图层种类</label>
+                                    <div class="col-sm-10">
+                                        <select id="m_kind" class="select2" style="width:160px;"></select>
                                     </div>
-                                    <label class="col-sm-2 control-label">坐标系</label>
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    <label class="col-sm-2 control-label">记录日期</label>
+                                    <div class="col-sm-10">
+                                        <input id="m_recordDate" class="form-control" placeholder="输入记录日期"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    <label class="col-sm-2 control-label">属性</label>
+                                    <div class="col-sm-10">
+                                        <input id="m_prop" class="form-control" placeholder="输入属性"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">瓦片类型</label>
                                     <div class="col-sm-4">
-                                        <input id="m_profile" class="form-control" placeholder="输入坐标系"/>
+                                        <select id="m_tileType" class="select2"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">文件后缀</label>
+                                    <div class="col-sm-4">
+                                        <input id="m_suffix" class="form-control" placeholder="输入瓦片文件后缀名"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">EPSG</label>
+                                    <div class="col-sm-4">
+                                        <select id="m_epsg" class="select2"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -118,50 +138,15 @@
                                         <input id="m_originY" class="form-control" placeholder="输入原点纬度"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">URL模板</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_href" class="form-control" placeholder="输入URL模板"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">消息内容类型</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_mimeType" class="form-control" placeholder="输入消息内容类型"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">扩展名</label>
-                                    <div class="col-sm-4">
-                                        <input id="m_extension" class="form-control" placeholder="输入扩展名"/>
-                                    </div>
-                                    <label class="col-sm-3 control-label">文件扩展名</label>
-                                    <div class="col-sm-3">
-                                        <input id="m_fileExtension" class="form-control" placeholder="输入文件扩展名"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">记录日期</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_recordDate" class="form-control" placeholder="输入记录日期"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">属性</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_prop" class="form-control" placeholder="输入属性"/>
-                                    </div>
-                                </div>
-
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" onclick="addTileMap()">保存</button>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
 
         <div class="modal modal-info fade" id="modal-edit">
             <div class="modal-dialog">
@@ -175,21 +160,21 @@
                         <form class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">ID</label>
-                                    <div class="col-sm-8">
+                                    <label class="col-sm-2 control-label">ID</label>
+                                    <div class="col-sm-10">
                                         <input id="m_id2" class="form-control" disabled="true"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">标题</label>
+                                    <label class="col-sm-2 control-label">名称</label>
                                     <div class="col-sm-10">
-                                        <input id="m_title2" class="form-control" placeholder="输入标题"/>
+                                        <input id="m_name2" class="form-control" placeholder="输入名称"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">摘要</label>
+                                    <label class="col-sm-2 control-label">备注</label>
                                     <div class="col-sm-10">
-                                        <input id="m_abstract2" class="form-control" placeholder="输入摘要"/>
+                                        <input id="m_memo2" class="form-control" placeholder="输入备注"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -199,23 +184,43 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">图层组</label>
-                                    <div class="col-sm-4">
-                                        <select id="m_group2" class="select2"></select>
-                                    </div>
-                                    <label class="col-sm-2 control-label">图层种类</label>
-                                    <div class="col-sm-4">
-                                        <select id="m_kind2" class="select2"></select>
+                                    <label class="col-sm-2 control-label">图层分组</label>
+                                    <div class="col-sm-10">
+                                        <select id="m_group2" class="select2" style="width:160px;"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">空间参考</label>
+                                    <label class="col-sm-2 control-label">图层种类</label>
                                     <div class="col-sm-4">
-                                        <input id="m_srs2" class="form-control" placeholder="输入空间参考"/>
+                                        <select id="m_kind2" class="select2" style="width:160px;"></select>
                                     </div>
-                                    <label class="col-sm-2 control-label">坐标系</label>
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    <label class="col-sm-2 control-label">记录日期</label>
+                                    <div class="col-sm-10">
+                                        <input id="m_recordDate2" class="form-control" placeholder="输入记录日期"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none">
+                                    <label class="col-sm-2 control-label">属性</label>
+                                    <div class="col-sm-10">
+                                        <input id="m_prop2" class="form-control" placeholder="输入属性"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">瓦片类型</label>
                                     <div class="col-sm-4">
-                                        <input id="m_profile2" class="form-control" placeholder="输入坐标系"/>
+                                        <select id="m_tileType2" class="select2"></select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">文件后缀</label>
+                                    <div class="col-sm-4">
+                                        <input id="m_suffix2" class="form-control" placeholder="输入瓦片文件后缀名"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">EPSG</label>
+                                    <div class="col-sm-4">
+                                        <select id="m_epsg2" class="select2"></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -248,46 +253,11 @@
                                         <input id="m_originY2" class="form-control" placeholder="输入原点纬度"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">URL模板</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_href2" class="form-control" placeholder="输入URL模板"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">消息内容类型</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_mimeType2" class="form-control" placeholder="输入消息内容类型"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">扩展名</label>
-                                    <div class="col-sm-4">
-                                        <input id="m_extension2" class="form-control" placeholder="输入扩展名"/>
-                                    </div>
-                                    <label class="col-sm-3 control-label">文件扩展名</label>
-                                    <div class="col-sm-3">
-                                        <input id="m_fileExtension2" class="form-control" placeholder="输入文件扩展名"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">记录日期</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_recordDate2" class="form-control" placeholder="输入记录日期"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">属性</label>
-                                    <div class="col-sm-10">
-                                        <input id="m_prop2" class="form-control" placeholder="输入属性"/>
-                                    </div>
-                                </div>
-
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="saveTileMap()">保存</button>
+                        <button type="button" class="btn btn-primary" onclick="editTileMap()">保存</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

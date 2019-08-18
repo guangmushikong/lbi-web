@@ -4,6 +4,9 @@ function init(){
     geoserver=$("#m_mapserver").val();
     initTable();
     loadData();
+    $('#m_password').on('keyup click',function () {
+        $("#m_md5").val($.md5($("#m_password").val()));
+    });
 }
 function initTable(){
 	table= $('#userlist').DataTable({
@@ -124,13 +127,14 @@ function addUser(){
     $("#modal-add").modal('hide');
     var jsondata={
         username:$("#m_username").val(),
-        password:$("#m_password").val(),
+        password:$("#m_md5").val(),
         nick:$("#m_nick").val(),
         mobile:$("#m_mobile").val(),
         email:$("#m_email").val(),
         roleId:$("#m_roleId").val(),
         projectIds:$("#m_projectIds").val()
     };
+
     $.ajax({
         type: "POST",
         url: "/user/add",

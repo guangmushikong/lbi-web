@@ -1,6 +1,8 @@
 var geoserver;
 var curTileMap;
 var serviceDict;
+var groupDict;
+var kindDict;
 var perPixelDict;
 function init(){
     geoserver=$("#m_mapserver").val();
@@ -12,6 +14,21 @@ function initDict(){
     serviceDict=[];
     serviceDict["1"]="XYZ";
     serviceDict["2"]="TMS";
+    groupDict=[];
+    groupDict["L0"]="基础栅格图层";
+    groupDict["L1"]="项目栅格图层";
+    groupDict["L2"]="基础矢量图层";
+    groupDict["L3"]="项目矢量图层";
+    groupDict["L4"]="绘制图层";
+    kindDict=[];
+    //kindDict[1]="Geoserver服务";
+    //kindDict[2]="OSS缓存图片";
+    //kindDict[3]="OSS时序缓存图片";
+    kindDict[4]="TMS瓦片缓存";
+    kindDict[5]="TMS时序瓦片缓存";
+    kindDict[6]="PG图层";
+    kindDict[7]="XYZ瓦片缓存";
+
     perPixelDict=[];
     perPixelDict[0]=156543.03390000000945;
     perPixelDict[1]=78271.51695000000473;
@@ -57,9 +74,19 @@ function loadMapDesc(){
                 $("#m_name").text(data.title);
                 $("#m_comment").text(data.abstract);
                 $("#m_props").append('<li class="list-group-item"><b>服务类型：</b>'+serviceDict[data.serviceId]+'</li>');
-                $("#m_props").append('<li class="list-group-item"><b>SRS：</b>'+data.srs+'</li>');
-                $("#m_props").append('<li class="list-group-item"><b>Profile：</b>'+data.profile+'</li>');
-                $("#m_props").append('<li class="list-group-item"><b>MimeType：</b>'+data.mimeType+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>图层分组：</b>'+groupDict[data.group]+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>图层种类：</b>'+kindDict[data.kind]+'</li>');
+                $("#m_props").append('<li class="list-group-item"><b>瓦片类型：</b>'+data.tileType+'</li>');
+
+                $("#m_props").append('<li class="list-group-item"><b>SRS：</b>EPSG:'+data.epsg+'</li>');
+                var profile;
+                if(data.epsg==4326){
+                    profile="geodetic";
+                }else {
+                    profile="mercator";
+                }
+                $("#m_props").append('<li class="list-group-item"><b>Profile：</b>'+profile+'</li>');
+
 
             }
         }
@@ -78,9 +105,9 @@ function loadMapSets(){
                     var item=list[i];
                     var tr='<tr>';
                     tr+='<td>'+item.id+'</td>';
-                    tr+='<td>'+item.href+'</td>';
-                    tr+='<td>'+item.unitsPerPixel+'</td>';
                     tr+='<td>'+item.sortOrder+'</td>';
+                    tr+='<td>'+item.unitsPerPixel+'</td>';
+                    tr+='<td>'+item.href+'</td>';
                     tr+='<td><button type="button" class="btn btn-xs btn-danger" onclick="removeTileSet('+item.id+')" >删除</button></td>';
                     tr+='</tr>';
                     $("#maplist tbody").append(tr);
@@ -96,9 +123,13 @@ function addTileSet(){
     var z=$("#m_order").val();
     var href;
     if(curTileMap.serviceId==1){
-        href=curTileMap.href+"/{x}/{y}/"+z+"."+curTileMap.extension;
+        href="http://${mapserver}/xyz/1.0.0/"
+            +curTileMap.name+"@EPSG:"+curTileMap.epsg+"@"+curTileMap.tileType
+            +'/{x}/{y}/'+z+'.'+curTileMap.tileType;
     }else {
-        href=curTileMap.href+"/"+z+"/{x}/{y}."+curTileMap.extension;
+        href="http://${mapserver}/tms/1.0.0/"
+            +curTileMap.name+"@EPSG:"+curTileMap.epsg+"@"+curTileMap.tileType
+            +'/'+z+'/{x}/{y}.'+curTileMap.tileType;
     }
     var jsondata={
         mapId:$("#m_mapId").val(),

@@ -2,7 +2,7 @@
 package com.lbi.tile.service;
 
 import com.lbi.tile.dao.TileMapDao;
-import com.lbi.tile.model.TileMapDO;
+import com.lbi.tile.model.TileMapVO;
 import com.lbi.tile.model.TileSetDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,24 @@ public class TileMapService {
     @Autowired
     TileMapDao tileMapDao;
 
-    public List<TileMapDO> listTileMap(){
+    public List<TileMapVO> listTileMap(){
         return tileMapDao.listTileMap();
     }
 
-    public TileMapDO getTileMap(long id){
+    public TileMapVO getTileMap(long id){
         return tileMapDao.getTileMap(id);
+    }
+
+    public void addTileMap(TileMapVO tileMap){
+        tileMapDao.addTileMap(tileMap);
+    }
+
+    public void updateTileMap(TileMapVO tileMap){
+        tileMapDao.updateTileMap(tileMap);
+    }
+
+    public void delTileMap(long id){
+        tileMapDao.delTileMap(id);
     }
 
     public List<TileSetDO> listTileSet(long mapId){

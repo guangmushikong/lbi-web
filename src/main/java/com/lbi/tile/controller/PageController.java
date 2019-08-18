@@ -70,12 +70,12 @@ public class PageController {
         return "demo";
     }
 
-    @RequestMapping("/meta/loc")
+    @RequestMapping("/demo/loc")
     public ModelAndView loc(
             @RequestParam(value = "x",required=false, defaultValue="0.0") double x,
             @RequestParam(value = "y",required=false, defaultValue="0.0") double y,
             @RequestParam(value = "z",required=false, defaultValue="0") int z){
-        ModelAndView mav = new ModelAndView("meta/loc");
+        ModelAndView mav = new ModelAndView("demo/loc");
         mav.addObject("x", x);
         mav.addObject("y", y);
         mav.addObject("z", z);
@@ -83,12 +83,12 @@ public class PageController {
         return mav;
     }
 
-    @RequestMapping("/meta/cesium")
+    @RequestMapping("/demo/cesium")
     public ModelAndView cesium(
             @RequestParam(value = "x",required=false, defaultValue="0.0") double x,
             @RequestParam(value = "y",required=false, defaultValue="0.0") double y,
             @RequestParam(value = "z",required=false, defaultValue="0") int z){
-        ModelAndView mav = new ModelAndView("meta/cesium");
+        ModelAndView mav = new ModelAndView("demo/cesium");
         mav.addObject("x", x);
         mav.addObject("y", y);
         mav.addObject("z", z);
