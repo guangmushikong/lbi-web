@@ -58,4 +58,16 @@ public class DataSetController {
         dataSetService.delDataSet(id);
         return new ResultBody<>(0,"OK");
     }
+
+    @GetMapping("/syncShp")
+    public ResultBody syncShp(@RequestParam("layerName") String layerName) {
+        log.info("【syncShp】name:{}",layerName);
+        try{
+            dataSetService.shp2PgTable(layerName);
+            return new ResultBody<>(0,"OK");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResultBody<>(-1,e.getMessage());
+        }
+    }
 }

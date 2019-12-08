@@ -345,6 +345,18 @@ function addTileMap(){
             loadMapList();
         }
     });
+    console.log()
+    if($("#m_kind").val()==6){
+        $.ajax({
+            type: "GET",
+            url: "/dataset/syncShp?layerName="+$("#m_name").val(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (json) {
+                console.log(json);
+            }
+        });
+    }
 }
 function editTileMap(){
     $("#modal-edit").modal('hide');

@@ -80,6 +80,10 @@ public class DataSetDao extends CommonDao{
         jdbcTemplate.update(sql,new Object[]{id},new int[]{Types.BIGINT});
     }
 
+    public void saveRow(String sql,Object[] objects,int[] types){
+        jdbcTemplate.update(sql,objects,types);
+    }
+
     private DataSetDO toDataSetDO(ResultSet rs)throws SQLException{
         DataSetDO u=new DataSetDO();
         u.setId(rs.getLong("id"));

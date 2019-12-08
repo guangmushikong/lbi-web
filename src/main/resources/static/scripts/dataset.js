@@ -39,7 +39,7 @@ function initTable(){
         "dom": '<"top">rt<"bottom"ip><"clear">',
         "columns": [
             {"data": "id","title":"ID","width":"20"},
-            {"data": "name","title":"项目名称","width":"150"},
+            {"data": "name","title":"名称","width":"150"},
             {"data": "memo","title":"备注","width":"80"},
             {"data": null,"title":"记录日期","width":"80","orderable":false,
                 "render": function (d) {

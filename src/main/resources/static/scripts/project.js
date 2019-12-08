@@ -18,7 +18,7 @@ function initTable(){
                 "width":"5"
             },
             {"data": "id","title":"ID","width":"20"},
-            {"data": "name","title":"项目名称","width":"150"},
+            {"data": "name","title":"名称","width":"150"},
             {"data": "memo","title":"备注","width":"40"},
             {"data": "createTime","title":"创建时间","width":"100"},
             {"data": "modifyTime","title":"修改时间","width":"100"},

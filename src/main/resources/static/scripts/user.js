@@ -1,12 +1,26 @@
 var geoserver;
 var table;
+var roleDict;//角色字典
 function init(){
     geoserver=$("#m_mapserver").val();
+    initDict();
     initTable();
     loadData();
     $('#m_password').on('keyup click',function () {
         $("#m_md5").val($.md5($("#m_password").val()));
     });
+}
+function initDict(){
+    roleDict=[];
+    roleDict[1]="管理员";
+    roleDict[2]="运维人员";
+    roleDict[3]="普通用户";
+    for(var key in roleDict){
+        $("#m_role").append('<option value="'+key+'">'+roleDict[key]+'</option>');
+        $("#m_role2").append('<option value="'+key+'">'+roleDict[key]+'</option>');
+    }
+    $("#m_role").select2();
+    $("#m_role2").select2();
 }
 function initTable(){
 	table= $('#userlist').DataTable({
@@ -25,7 +39,11 @@ function initTable(){
             {"data": "nick","title":"昵称","width":"40"},
             {"data": "mobile","title":"手机","width":"100"},
             {"data": "email","title":"邮箱","width":"100"},
-            {"data": "roleId","title":"角色ID","width":"100"},
+            {"data": null,"title":"角色","width":"100",
+                "render": function (d) {
+                    return roleDict[d.roleId];
+                }
+            },
             {"data": "projectIds","title":"项目ID","width":"100"},
             {"data": "createTime","title":"创建时间","width":"100"},
             {"data": "modifyTime","title":"修改时间","width":"100"},
@@ -92,7 +110,7 @@ function curUser(d){
     $("#m_nick2").val(d.nick);
     $("#m_mobile2").val(d.mobile);
     $("#m_email2").val(d.email);
-    $("#m_roleId2").val(d.roleId);
+    $("#m_role2").select2("val",[d.roleId]);
     $("#m_projectIds2").val(d.projectIds);
 }
 function loadData(){
@@ -131,7 +149,7 @@ function addUser(){
         nick:$("#m_nick").val(),
         mobile:$("#m_mobile").val(),
         email:$("#m_email").val(),
-        roleId:$("#m_roleId").val(),
+        roleId:$("#m_role").val(),
         projectIds:$("#m_projectIds").val()
     };
 
@@ -156,7 +174,7 @@ function editUser(){
         nick:$("#m_nick2").val(),
         mobile:$("#m_mobile2").val(),
         email:$("#m_email2").val(),
-        roleId:$("#m_roleId2").val(),
+        roleId:$("#m_role2").val(),
         projectIds:$("#m_projectIds2").val()
     };
     $.ajax({

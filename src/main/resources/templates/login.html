@@ -20,7 +20,7 @@
   <div class="login-logo">
     <a href="/"><b>八千云 - 数据门户</b></a>
   </div>
-  <!-- /.login-logo -->
+
   <div class="login-box-body">
     <p th:if="${param.logout}" class="bg-warning">已注销</p>
     <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
@@ -41,18 +41,11 @@
         </div>
       </div>
     </form>
-
-
-
   </div>
-  <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 
-<!-- jQuery 3 -->
 <script th:src="@{/assets/jquery/jquery.min.js}"></script>
 <script th:src="@{/assets/jquery/jquery.cookie.js}"></script>
-<!-- Bootstrap 3.3.7 -->
 <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
