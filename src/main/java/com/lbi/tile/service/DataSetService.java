@@ -5,7 +5,7 @@ import com.lbi.tile.dao.DataSetDao;
 import com.lbi.tile.dao.ProjectDao;
 import com.lbi.tile.model.DataSetDO;
 import com.lbi.tile.model.ProjectDO;
-import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.geotools.data.shapefile.ShapefileDataStore;
@@ -134,15 +134,56 @@ public class DataSetService {
         FeatureIterator<SimpleFeature> itertor = result.features();
         while(itertor.hasNext()) {
             SimpleFeature feature = itertor.next();
-            List<String> valueList = new ArrayList<>();
-            for (Name fieldName : nameList) {
-                String value=feature.getAttribute(fieldName).toString();
-                valueList.add(value);
+
+            Object[] objs=new Object[nameList.size()+1];
+            for(int i=0;i<nameList.size();i++){
+                Name fieldName=nameList.get(i);
+                objs[i]=feature.getAttribute(fieldName);
             }
             Geometry geometry = (Geometry) feature.getDefaultGeometry();
-            valueList.add(geometry.toText());
-            Object[] objects=valueList.stream().toArray();
-            dataSetDao.saveRow(iSql,objects,types);
+            List<Geometry> geomList=simplifyGeometry(geometry);
+            for(Geometry geom:geomList){
+                objs[nameList.size()]=geom.toText();
+                dataSetDao.saveRow(iSql,objs,types);
+            }
         }
+    }
+
+    /**
+     * 简化复杂空间类型为简单类型
+     * @param geometry 空间对象
+     * @return 简单类型空间对象
+     */
+    private List<Geometry> simplifyGeometry(Geometry geometry){
+        List<Geometry> list=new ArrayList<>();
+        if (geometry instanceof MultiPolygon) {
+            MultiPolygon m = (MultiPolygon) geometry;
+            for (int i = 0; i < m.getNumGeometries(); i++) {
+                Polygon polygon = (Polygon) m.getGeometryN(i);
+                list.add(polygon);
+            }
+        }else if(geometry instanceof MultiLineString) {
+            MultiLineString m = (MultiLineString) geometry;
+            for (int i = 0; i < m.getNumGeometries(); i++) {
+                LineString lineString = (LineString) m.getGeometryN(i);
+                list.add(lineString);
+            }
+        }else if(geometry instanceof MultiPoint) {
+            MultiPoint m = (MultiPoint) geometry;
+            for (int i = 0; i < m.getNumGeometries(); i++) {
+                Point point = (Point) m.getGeometryN(i);
+                list.add(point);
+            }
+        }else if(geometry instanceof GeometryCollection) {
+            GeometryCollection m = (GeometryCollection) geometry;
+            for (int i = 0; i < m.getNumGeometries(); i++) {
+                Geometry geom = m.getGeometryN(i);
+                List<Geometry> geomList=simplifyGeometry(geom);
+                list.addAll(geomList);
+            }
+        }else {
+            list.add(geometry);
+        }
+        return list;
     }
 }

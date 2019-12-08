@@ -345,7 +345,7 @@ function addTileMap(){
             loadMapList();
         }
     });
-    console.log()
+    console.log("【syncShp】");
     if($("#m_kind").val()==6){
         $.ajax({
             type: "GET",
