@@ -24,7 +24,10 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /*************************************
@@ -65,7 +68,7 @@ public class DataSetService {
     }
 
     public void shp2PgTable(String layerName)throws Exception{
-        String filePath=tiledata+ File.separator+layerName+".shp";
+        String filePath=tiledata+File.separator+layerName+File.separator+layerName+".shp";
         log.info("【path】"+filePath);
         ShapefileDataStore shpDataStore = new ShapefileDataStore(new File(filePath).toURI().toURL());
         shpDataStore.setCharset(Charset.forName("GBK"));
@@ -108,7 +111,16 @@ public class DataSetService {
 
         StringBuilder sb=new StringBuilder();
         sb.append("create table if not exists data.").append(tableName);
-        sb.append("(id bigserial primary key,");
+        Set<String> fieldSet=nameList.stream().map(Name::toString).collect(Collectors.toSet());
+        log.info("【field】"+fieldSet.toString());
+        if(!fieldSet.contains("id")){
+            sb.append("(id bigserial primary key,");
+        }else if(!fieldSet.contains("tid")){
+            sb.append("(tid bigserial primary key,");
+        }else {
+            sb.append("(ttid bigserial primary key,");
+        }
+
         for(Name name:nameList){
             AttributeType attributeType=type.getType(name);
             sb.append(attributeType.getName().toString().toLowerCase()).append(" text,");

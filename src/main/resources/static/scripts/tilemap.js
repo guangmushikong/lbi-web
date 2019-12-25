@@ -55,11 +55,20 @@ function init(){
         }else if($("#m_kind2").val()==6){
             $("#m_recordDate2").parent().parent().hide();
             $("#m_prop2").parent().parent().show();
+
         }else {
             $("#m_recordDate2").parent().parent().hide();
             $("#m_prop2").parent().parent().hide();
         }
+
+        if($("#m_kind2").val()==6){
+            $("#m_syncShp").show();
+        }else {
+            $("#m_syncShp").hide();
+        }
+
     });
+
 }
 function initDict(){
     serviceDict=[];
@@ -345,11 +354,29 @@ function addTileMap(){
             loadMapList();
         }
     });
+
+    syncShp1();
+}
+function syncShp1(){
     console.log("【syncShp】");
     if($("#m_kind").val()==6){
         $.ajax({
             type: "GET",
             url: "/dataset/syncShp?layerName="+$("#m_name").val(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (json) {
+                console.log(json);
+            }
+        });
+    }
+}
+function syncShp(){
+    console.log("【syncShp】");
+    if($("#m_kind2").val()==6){
+        $.ajax({
+            type: "GET",
+            url: "/dataset/syncShp?layerName="+$("#m_name2").val(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (json) {
