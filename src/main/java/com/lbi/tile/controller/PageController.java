@@ -96,6 +96,21 @@ public class PageController {
         return mav;
     }
 
+    @RequestMapping("/demo/cesium_zhaotong")
+    public String cesium_zhaotong(){
+        return "demo/cesium_zhaotong";
+    }
+
+    @RequestMapping("/demo/cesium_gujiao")
+    public String cesium_gujiao(){
+        return "demo/cesium_gujiao";
+    }
+
+    @RequestMapping("/demo/cesium_china")
+    public String cesium_china(){
+        return "demo/cesium_china";
+    }
+
     @RequestMapping("/meta/dataset")
     public ModelAndView dataset(){
         ModelAndView mav = new ModelAndView("meta/dataset");

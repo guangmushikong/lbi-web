@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cesium示例地图</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.70/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
+<body onload="init()">
+<div class="panel panel-default">
+    <div class="panel-heading">
+    	<div class="row">
+          <div class="col-md-4"><strong>昭通-Cesium地图</strong></div>
+          <div class="col-md-8"><label id="i_click"></label></div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="mapbox" style="width: 100%; height:600px"></div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-xs-4"><label id="i_coordinate"></label></div>
+            <div class="col-xs-8"><label id="i_extent"></label></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.70/Build/Cesium/Cesium.js"></script>
+
+<script th:src="@{/scripts/cesium_zhaotong.js}"></script>
+</html>
