@@ -1,23 +1,7 @@
-################### 应用配置
-info:
-  version: 0.0.1
-  name: ${spring.application.name}
-  comment: "数据门户"
-################### Zuul Configuration ##########################
-zuul:
-  routes:
-    eureka_server:
-      path: /eureka_server/**
-      serviceId: register-server
-      stripPrefix: true
-      custom-sensitive-headers: true
-    eureka_server_static:
-      path: /eureka/**
-      serviceId: register-server
-      stripPrefix: false
-      custom-sensitive-headers: true
-    geoserver:
-      path: /geoserver/**
-      serviceId: http://172.25.28.117:8888/geoserver
-      stripPrefix: true
-      custom-sensitive-headers: true
+server:
+  port: 8080
+spring:
+  application:
+    name: lbi-web
+  profiles:
+    active: dev

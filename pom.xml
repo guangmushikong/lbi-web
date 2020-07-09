@@ -26,34 +26,10 @@
         <springboot.version>2.0.3.RELEASE</springboot.version>
         <java.version>1.8</java.version>
         <geotools.version>19.0</geotools.version>
-        <spring.cloud.version>Finchley.RELEASE</spring.cloud.version>
     </properties>
 
 
     <dependencies>
-        <!-- SpringCloud start -->
-        <!-- 注册中心依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!-- 配置中心依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <!-- 服务发现+负载均衡依赖 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- 动态网关 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
-        <!-- SpringCloud end -->
-
         <!-- SpringBoot start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -111,18 +87,6 @@
             <version>${geotools.version}</version>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories>
         <repository>
